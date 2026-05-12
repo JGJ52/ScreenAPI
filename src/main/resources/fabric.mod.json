@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "screenapi",
+  "version": "${version}",
+  "name": "ScreenAPI",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "unlicense",
+  "icon": "assets/screenapi/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "hu.jgj52.screenapi.client.ScreenapiClient"
+    ],
+    "main": [
+      "hu.jgj52.screenapi.Screenapi"
+    ]
+  },
+  "mixins": [
+    "${mixins_file}"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "<=${minecraft_version} >=${minecraft_lower_version}"
+  }
+}

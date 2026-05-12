@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+        maven {
+            name = "KikuGie"
+            url = uri("https://maven.kikugie.dev/snapshots")
+        }
+    }
+}
+
+plugins {
+    id("dev.kikugie.stonecutter") version "0.9.3"
+}
+
+stonecutter {
+    kotlinController = false
+    centralScript = "build.unobf.gradle"
+
+    create(getRootProject()) {
+        versions "26.1.2", "1.21.11"
+        versions("1.21.11").buildscript("build.obf.gradle")
+    }
+}
