@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation "hu.jgj52:screenapi:1.0.0"
+    implementation "hu.jgj52:screenapi:1.0.0+1.21.11"
 }
 ```
 
