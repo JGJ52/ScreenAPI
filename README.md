@@ -3,6 +3,17 @@
 
 i got so upset trying to make the math mathing in scroll
 
+## build.gradle
+```groovy
+repositories {
+    maven { url "https://maven.jgj52.hu/repository/maven-releases/" }
+}
+
+dependencies {
+    implementation "hu.jgj52:screenapi:1.0.0"
+}
+```
+
 ## API usage
 ```java
 package me.you.yourprojectwhichusesscreens.screens;
