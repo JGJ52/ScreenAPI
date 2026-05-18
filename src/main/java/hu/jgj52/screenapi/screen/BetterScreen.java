@@ -21,7 +21,8 @@ public abstract class BetterScreen extends Screen {
 
     protected record Widget<T extends AbstractWidget>(
             T widget,
-            String id
+            String id,
+            boolean pinned
     ) {}
     private final List<Widget<?>> widgets = new ArrayList<>();
     private final Map<String, Widget<?>> fasterWidgets = new HashMap<>();
@@ -49,13 +50,16 @@ public abstract class BetterScreen extends Screen {
         }
     }
 
-    protected <T extends AbstractWidget> T widget(T widget, String id) {
-        Widget<T> widg = new Widget<>(widget, id);
+    protected <T extends AbstractWidget> T widget(T widget, String id, boolean pinned) {
+        Widget<T> widg = new Widget<>(widget, id, pinned);
         widgets.add(widg);
         if (id != null) {
             fasterWidgets.put(id, widg);
         }
         return widget;
+    }
+    protected <T extends AbstractWidget> T widget(T widget, String id) {
+        return widget(widget, id, false);
     }
     protected <T extends AbstractWidget> T widget(T widget) {
         return widget(widget, null);
@@ -76,6 +80,7 @@ public abstract class BetterScreen extends Screen {
         int min = 0;
         int max = 0;
         for (Widget<?> widget : widgets) {
+            if (widget.pinned) continue;
             int wy = widget.widget.getY() - scrollOffset;
             min = Math.min(min, wy);
             max = Math.max(max, wy + widget.widget.getHeight());
@@ -88,6 +93,7 @@ public abstract class BetterScreen extends Screen {
             will = -max;
         }
         for (Widget<?> widget : widgets) {
+            if (widget.pinned) continue;
             widget.widget.setY(
                     widget.widget.getY() + (will - scrollOffset)
             );
