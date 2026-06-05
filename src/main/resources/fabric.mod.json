@@ -3,10 +3,10 @@
   "id": "screenapi",
   "version": "${version}",
   "name": "ScreenAPI",
-  "description": "",
-  "authors": [],
+  "description": "Makes screen making easier for mod developers",
+  "authors": ["JGJ52"],
   "contact": {},
-  "license": "unlicense",
+  "license": "GPL-3.0",
   "icon": "assets/screenapi/icon.png",
   "environment": "client",
   "entrypoints": {
@@ -24,5 +24,14 @@
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
     "minecraft": "<=${minecraft_version} >=${minecraft_lower_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/screenapi",
+        "modmenu.discord": "https://discord.gg/5pjP2DxQK8"
+      },
+      "update_checker": true
+    }
   }
 }
