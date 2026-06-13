@@ -43,6 +43,8 @@ public abstract class BetterScreen extends Screen {
 
     @Override
     protected void init() {
+        clearWidgets();
+        widgets.clear();
         addRenderableOnly(this::render);
         createWidgets(font);
         for (Widget<?> widget : widgets) {
