@@ -6,11 +6,11 @@ i got so upset trying to make the math mathing in scroll
 ## build.gradle
 ```groovy
 repositories {
-    maven { url "https://maven.jgj52.hu/repository/maven-releases/" }
+    maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
-    implementation "hu.jgj52:screenapi:1.0.0+1.21.11"
+   implementation "maven.modrinth:screenapi:${project.screenapi_version}"
 }
 ```
 
