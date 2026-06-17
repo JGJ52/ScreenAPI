@@ -30,7 +30,7 @@ public abstract class BetterScreen extends Screen {
 
     protected abstract int getScrollSpeed();
     public abstract void render(
-            //? >= 26.1.2 {
+            //? >= 26.1 {
             net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics,
             //? } else {
             /*net.minecraft.client.gui.@NotNull GuiGraphics guiGraphics,

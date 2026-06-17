@@ -13,7 +13,7 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version "0.9.3"
+    id("dev.kikugie.stonecutter") version "0.9.6"
 }
 
 stonecutter {
@@ -21,7 +21,7 @@ stonecutter {
     centralScript = "build.unobf.gradle"
 
     create(getRootProject()) {
-        versions "26.1.2", "1.21.11"
-        versions("1.21.11").buildscript("build.obf.gradle")
+        versions "26.1", "1.21"
+        versions("1.21").buildscript("build.obf.gradle")
     }
 }
