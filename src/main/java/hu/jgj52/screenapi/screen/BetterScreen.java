@@ -4,7 +4,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,16 +31,14 @@ public abstract class BetterScreen extends Screen {
     }
 
     protected abstract int getScrollSpeed();
-    public abstract void render(
-            //? >= 26.1 {
+    //? >= 26.1 {
+    public void render(
             net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics,
-            //? } else {
-            /*net.minecraft.client.gui.@NotNull GuiGraphics guiGraphics,
-            *///? }
             int mouseX,
             int mouseY,
             float partialTick
-    );
+    ) {}
+    //? }
     protected abstract void createWidgets(Font font);
 
     @Override
