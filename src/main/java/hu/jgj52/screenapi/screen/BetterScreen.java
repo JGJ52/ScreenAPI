@@ -27,6 +27,9 @@ public abstract class BetterScreen extends Screen {
     private final List<Widget<?>> widgets = new ArrayList<>();
     private final Map<String, Widget<?>> fasterWidgets = new HashMap<>();
     private int scrollOffset = 0;
+    protected int getScrollOffset() {
+        return scrollOffset;
+    }
 
     protected abstract int getScrollSpeed();
     public abstract void render(
@@ -74,7 +77,6 @@ public abstract class BetterScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double x, double y, double scrollX, double scrollY) {
-        // NEVER doing this again
         int will = scrollOffset + (int) (scrollY * getScrollSpeed());
         int min = 0;
         int max = 0;
