@@ -44,12 +44,8 @@ public abstract class BetterScreen extends Screen {
     @Override
     protected void init() {
         clearWidgets();
-        widgets.clear();
         addRenderableOnly(this::render);
         createWidgets(font);
-        for (Widget<?> widget : widgets) {
-            addRenderableWidget(widget.widget);
-        }
     }
 
     protected <T extends AbstractWidget> T widget(T widget, String id, boolean pinned) {
@@ -58,6 +54,7 @@ public abstract class BetterScreen extends Screen {
         if (id != null) {
             fasterWidgets.put(id, widg);
         }
+        addRenderableWidget(widget);
         return widget;
     }
     protected <T extends AbstractWidget> T widget(T widget, String id) {
