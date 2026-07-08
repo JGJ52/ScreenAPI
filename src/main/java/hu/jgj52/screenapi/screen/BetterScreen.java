@@ -38,9 +38,7 @@ public abstract class BetterScreen extends Screen {
     /*@Override
     *///? }
     public void render(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
-        //? >= 26.1 {
-        extractRenderState(graphics, mouseX, mouseY, partialTick);
-        //? } else {
+        //? < 26.1 {
         /*super.render(graphics, mouseX, mouseY, partialTick);
         *///? }
     }
@@ -49,6 +47,7 @@ public abstract class BetterScreen extends Screen {
     @Override
     public final void extractRenderState(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
+        render(graphics, mouseX, mouseY, a);
     }
     //? }
 
