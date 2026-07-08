@@ -1,9 +1,11 @@
 package hu.jgj52.screenapi.screen;
 
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,22 +33,30 @@ public abstract class BetterScreen extends Screen {
     }
 
     protected abstract int getScrollSpeed();
+
+    //? < 26.1 {
+    /*@Override
+    *///? }
+    public void render(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        //? >= 26.1 {
+        extractRenderState(graphics, mouseX, mouseY, partialTick);
+        //? } else {
+        /*super.render(graphics, mouseX, mouseY, partialTick);
+        *///? }
+    }
+
     //? >= 26.1 {
-    public void render(
-            net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics,
-            int mouseX,
-            int mouseY,
-            float partialTick
-    ) {}
+    @Override
+    public final void extractRenderState(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractRenderState(graphics, mouseX, mouseY, a);
+    }
     //? }
+
     protected abstract void createWidgets(Font font);
 
     @Override
     protected void init() {
         clearWidgets();
-        //? >= 26.1 {
-        addRenderableOnly(this::render);
-        //? }
         createWidgets(font);
     }
 
