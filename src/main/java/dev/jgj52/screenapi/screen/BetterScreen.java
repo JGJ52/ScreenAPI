@@ -1,5 +1,6 @@
 package dev.jgj52.screenapi.screen;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -7,10 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class BetterScreen extends Screen {
     protected BetterScreen(Component title) {
@@ -25,7 +23,7 @@ public abstract class BetterScreen extends Screen {
             String id,
             boolean pinned
     ) {}
-    private final List<Widget<?>> widgets = new ArrayList<>();
+    private final Set<Widget<?>> widgets = new HashSet<>();
     private final Map<String, Widget<?>> fasterWidgets = new HashMap<>();
     private int scrollOffset = 0;
     protected int getScrollOffset() {
@@ -38,15 +36,29 @@ public abstract class BetterScreen extends Screen {
     /*@Override
     *///? }
     public void render(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
-        //? < 26.1 {
-        /*super.render(graphics, mouseX, mouseY, partialTick);
-        *///? }
+        for (Widget<?> w : widgets) {
+            AbstractWidget widget = w.widget;
+
+            boolean isOffscreen = widget.getX() + widget.getWidth() < 0
+                    || widget.getX() > width
+                    || widget.getY() + widget.getHeight() < 0
+                    || widget.getY() > height;
+
+            if (isOffscreen) continue;
+
+            widget.
+                    //? >= 26.1 {
+                    extractRenderState
+                    //? } else {
+                    /*render
+                    *///? }
+            (graphics, mouseX, mouseY, partialTick);
+        }
     }
 
     //? >= 26.1 {
     @Override
     public final void extractRenderState(@NotNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-        super.extractRenderState(graphics, mouseX, mouseY, a);
         render(graphics, mouseX, mouseY, a);
     }
     //? }
@@ -59,13 +71,25 @@ public abstract class BetterScreen extends Screen {
         createWidgets(font);
     }
 
+    @Override
+    public void resize(
+            //? <= 1.21.9 {
+            /*Minecraft minecraft,
+            *///? }
+            int width,
+            int height
+    ) {
+        this.width = width;
+        this.height = height;
+        init();
+    }
+
     protected <T extends AbstractWidget> T widget(T widget, String id, boolean pinned) {
         Widget<T> widg = new Widget<>(widget, id, pinned);
         widgets.add(widg);
         if (id != null) {
             fasterWidgets.put(id, widg);
         }
-        addRenderableWidget(widget);
         return widget;
     }
     protected <T extends AbstractWidget> T widget(T widget, String id) {
