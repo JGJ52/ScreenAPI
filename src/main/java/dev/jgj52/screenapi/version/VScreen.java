@@ -1,6 +1,7 @@
 package dev.jgj52.screenapi.version;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.spectator.SpectatorGui;
 import net.minecraft.client.gui.screens.Screen;
 
 public class VScreen {
@@ -9,8 +10,25 @@ public class VScreen {
     public static void setScreen(Screen screen) {
         mc.
         //? >= 26.2 {
-        /*gui.
-        *///? }
+        gui.
+        //? }
         setScreen(screen);
+    }
+
+    public static Screen current() {
+        return
+            //? >= 26.2 {
+            mc.gui.screen();
+            //? } else {
+            /*mc.screen;
+             *///? }
+    }
+
+    public static SpectatorGui spectatorGui() {
+        return mc.gui
+                //? >= 26.2 {
+                .hud
+                //? }
+                .getSpectatorGui();
     }
 }
