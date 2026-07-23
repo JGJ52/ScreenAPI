@@ -72,6 +72,7 @@ public abstract class BetterScreen extends Screen {
 
     @Override
     protected void clearWidgets() {
+        super.clearWidgets();
         widgets.clear();
     }
 
@@ -94,7 +95,7 @@ public abstract class BetterScreen extends Screen {
         if (id != null) {
             fasterWidgets.put(id, widg);
         }
-        return widget;
+        return addWidget(widget);
     }
     protected <T extends AbstractWidget> T widget(T widget, String id) {
         return widget(widget, id, false);
