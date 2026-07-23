@@ -37,6 +37,9 @@ public class ItemWidget extends AbstractWidget {
     public Item getItem() {
         return item;
     }
+    public Component getName() {
+        return name;
+    }
 
     public boolean isSelected() {
         return selected;
