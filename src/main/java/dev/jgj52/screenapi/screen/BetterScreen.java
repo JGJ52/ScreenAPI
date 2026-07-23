@@ -1,6 +1,5 @@
 package dev.jgj52.screenapi.screen;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -72,9 +71,14 @@ public abstract class BetterScreen extends Screen {
     }
 
     @Override
+    protected void clearWidgets() {
+        widgets.clear();
+    }
+
+    @Override
     public void resize(
             //? <= 1.21.9 {
-            /*Minecraft minecraft,
+            /*net.minecraft.client.Minecraft minecraft,
             *///? }
             int width,
             int height
