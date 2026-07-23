@@ -1,0 +1,120 @@
+plugins {
+    id("net.fabricmc.fabric-loom") version "1.16-SNAPSHOT"
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
+    `maven-publish`
+}
+
+version = project.properties["mod_version"] as String
+val minecraft_version = project.properties["minecraft_version"] as String
+val minecraft_higher_version = project.properties["minecraft_higher_version"] as String
+val loader_version = project.properties["loader_version"] as String
+
+val mixins_file = project.properties["mixins_file"] as String
+
+group = project.properties["maven_group"] as String
+
+stonecutter {
+    replacements.string(current.parsed >= "26.1") {
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string(current.parsed >= "26.1") {
+        replace("renderWidget", "extractWidgetRenderState")
+    }
+}
+
+base {
+    archivesName.set(project.properties["archives_base_name"] as String)
+}
+
+repositories {
+    fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
+        forRepository { maven(url) { name = alias } }
+        filter { groups.forEach(::includeGroup) }
+    }
+    strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+}
+
+dependencies {
+    minecraft("com.mojang:minecraft:${minecraft_version}")
+    implementation("net.fabricmc:fabric-loader:${loader_version}")
+
+    compileOnly(fletchingTable.modrinth("wavey-capes", minecraft_version, "fabric"))
+}
+
+tasks.processResources {
+    inputs.property("version", version)
+    inputs.property("minecraft_version", minecraft_version)
+    inputs.property("minecraft_higher_version", minecraft_higher_version)
+    inputs.property("loader_version", loader_version)
+    inputs.property("mixins_file", mixins_file)
+    filteringCharset = "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand(
+            "version" to version,
+            "minecraft_version" to minecraft_version,
+            "minecraft_higher_version" to minecraft_higher_version,
+            "loader_version" to loader_version,
+            "mixins_file" to mixins_file
+        )
+    }
+}
+
+val targetJavaVersion = 25
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+    options.release.set(targetJavaVersion)
+}
+
+java {
+    val javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    }
+    withSourcesJar()
+}
+
+tasks.jar {
+    from("LICENSE") {
+        rename { "${it}_${project.properties["archives_base_name"]}" }
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            artifactId = project.properties["archives_base_name"] as String
+            from(components["java"])
+        }
+    }
+    repositories {
+        // Add publishing repositories here
+    }
+}
+
+val env = file(".env")
+    .readLines()
+    .associate {
+        val (k, v) = it.split("=", limit = 2)
+        k to v
+    }
+
+publishMods {
+    file.set(tasks.jar.flatMap { it.archiveFile })
+    type.set(STABLE)
+    changelog.set("")
+    modLoaders.add("fabric")
+
+    modrinth {
+        projectId.set("BG4c0cQz")
+        accessToken.set(env["MODRINTH_TOKEN"])
+
+        environment.set(CLIENT_ONLY)
+
+        minecraftVersionRange {
+            start.set(minecraft_version)
+            end.set(minecraft_higher_version)
+        }
+    }
+}

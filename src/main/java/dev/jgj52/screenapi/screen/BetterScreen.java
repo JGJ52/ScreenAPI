@@ -1,4 +1,4 @@
-package hu.jgj52.screenapi.screen;
+package dev.jgj52.screenapi.screen;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
