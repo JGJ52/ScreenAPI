@@ -8,23 +8,31 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ItemDisplayWidget;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 public class ItemWidget extends AbstractWidget {
     private static final Minecraft mc = Minecraft.getInstance();
 
-    private final IDW item;
+    private final Set<Consumer<Boolean>> onSelected = new HashSet<>();
+    private final IDW witem;
     private final StringWidget text;
+    private final Item item;
     private final Font font;
     private boolean selected;
     public ItemWidget(int x, int y, int width, int height, Item item, Font font) {
         super(x, y, width, height, Component.empty());
+        this.item = item;
         this.font = font;
         Component name = Component.translatable(item.getDescriptionId());
-        this.item = new IDW(
+        witem = new IDW(
                 mc,
                 0, 0,
                 16, 16,
@@ -33,7 +41,7 @@ public class ItemWidget extends AbstractWidget {
                 false,
                 true
         );
-        this.item.setPosition(
+        witem.setPosition(
                 x + 4,
                 y + (height - 16) / 2
         );
@@ -47,17 +55,21 @@ public class ItemWidget extends AbstractWidget {
         );
     }
 
+    public Item getItem() {
+        return item;
+    }
+
     @Override
     public void setX(int x) {
         super.setX(x);
-        item.setX(x + 4);
+        witem.setX(x + 4);
         text.setX(x + 24);
     }
 
     @Override
     public void setY(int y) {
         super.setY(y);
-        item.setY(y + (height - 16) / 2);
+        witem.setY(y + (height - 16) / 2);
         text.setY(y + (height - font.lineHeight) / 2);
     }
 
@@ -66,6 +78,15 @@ public class ItemWidget extends AbstractWidget {
     }
     public void setSelected(boolean selected) {
         this.selected = selected;
+        onSelected.forEach(on -> on.accept(selected));
+    }
+    public void onSelected(Consumer<Boolean> on) {
+        onSelected.add(on);
+    }
+
+    @Override
+    public void onClick(@NotNull MouseButtonEvent event, boolean doubleClick) {
+        setSelected(!isSelected());
     }
 
     @Override
@@ -90,7 +111,7 @@ public class ItemWidget extends AbstractWidget {
                     0xFF_FFFFFF
             );
         }
-        item.extractWidgetRenderState(graphics, mouseX, mouseY, a);
+        witem.extractWidgetRenderState(graphics, mouseX, mouseY, a);
         text.extractWidgetRenderState(graphics, mouseX, mouseY, a);
     }
 
