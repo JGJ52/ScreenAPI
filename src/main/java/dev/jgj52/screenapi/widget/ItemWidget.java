@@ -18,9 +18,11 @@ public class ItemWidget extends AbstractWidget {
 
     private final IDW item;
     private final StringWidget text;
+    private final Font font;
     private boolean selected;
     public ItemWidget(int x, int y, int width, int height, Item item, Font font) {
         super(x, y, width, height, Component.empty());
+        this.font = font;
         Component name = Component.translatable(item.getDescriptionId());
         this.item = new IDW(
                 mc,
@@ -43,6 +45,20 @@ public class ItemWidget extends AbstractWidget {
             name,
             font
         );
+    }
+
+    @Override
+    public void setX(int x) {
+        super.setX(x);
+        item.setX(x + 4);
+        text.setX(x + 24);
+    }
+
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+        item.setY(y + (height - 16) / 2);
+        text.setY(y + (height - font.lineHeight) / 2);
     }
 
     public boolean isSelected() {
