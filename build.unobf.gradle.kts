@@ -92,7 +92,6 @@ publishing {
         // Add publishing repositories here
     }
 }
-
 val env = file(".env")
     .readLines()
     .associate {
