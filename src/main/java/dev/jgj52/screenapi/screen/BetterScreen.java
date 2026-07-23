@@ -22,7 +22,7 @@ public abstract class BetterScreen extends Screen {
             String id,
             boolean pinned
     ) {}
-    private final Set<Widget<?>> widgets = new HashSet<>();
+    private final List<Widget<?>> widgets = new ArrayList<>();
     private final Map<String, Widget<?>> fasterWidgets = new HashMap<>();
     private int scrollOffset = 0;
     protected int getScrollOffset() {
