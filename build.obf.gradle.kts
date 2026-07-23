@@ -5,8 +5,8 @@ plugins {
     `maven-publish`
 }
 
-version = project.properties["mod_version"] as String
 val minecraft_version = project.properties["minecraft_version"] as String
+version = project.properties["mod_version"] as String + "+" + minecraft_version
 val minecraft_higher_version = project.properties["minecraft_higher_version"] as String
 val loader_version = project.properties["loader_version"] as String
 

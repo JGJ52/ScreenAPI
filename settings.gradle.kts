@@ -20,7 +20,7 @@ stonecutter {
     centralScript = "build.unobf.gradle.kts"
 
     create(getRootProject()) {
-        versions("26.1", "1.21.9")
+        versions("26.2", "26.1", "1.21.9")
         versions("1.21.9").buildscript("build.obf.gradle.kts")
     }
 }
