@@ -77,12 +77,24 @@ public class ItemWidget extends AbstractWidget {
             );
         }
 
-        graphics.fakeItem(
+        graphics.
+                //? >= 26.1 {
+                fakeItem
+                //? } else {
+                /*renderFakeItem
+                *///? }
+        (
                 item.getDefaultInstance(),
                 getX() + 4,
                 getY() + (height - 16) / 2
         );
-        graphics.text(
+        graphics.
+                //? >= 26.1 {
+                text
+                //? } else {
+                /*drawString
+                *///? }
+        (
                 font,
                 name,
                 getX() + 24,
