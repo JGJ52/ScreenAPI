@@ -4,7 +4,7 @@ on:
     types: [published]
 jobs:
   build:
-    runs-on: debian-latest
+    runs-on: docker
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
