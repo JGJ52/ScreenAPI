@@ -93,12 +93,6 @@ publishing {
         // Add publishing repositories here
     }
 }
-val env = file(".env")
-    .readLines()
-    .associate {
-        val (k, v) = it.split("=", limit = 2)
-        k to v
-    }
 
 publishMods {
     file.set(tasks.remapJar.flatMap { it.archiveFile })
@@ -108,7 +102,7 @@ publishMods {
 
     modrinth {
         projectId.set("BG4c0cQz")
-        accessToken.set(env["MODRINTH_TOKEN"])
+        accessToken.set(System.getenv("MODRINTH_TOKEN"))
 
         environment.set(CLIENT_ONLY)
 
