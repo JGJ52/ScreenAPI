@@ -1,7 +1,8 @@
 name: Create Release
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 jobs:
   build:
     runs-on: java
