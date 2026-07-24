@@ -5,7 +5,7 @@ on:
       - 'v*'
 jobs:
   build:
-    runs-on: java
+    runs-on: docker
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
