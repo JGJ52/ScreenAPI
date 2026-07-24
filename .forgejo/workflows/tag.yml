@@ -34,7 +34,7 @@ jobs:
             ! -name "*-all.jar" \
             -exec cp {} dist/release/ \;
           
-      - name: Upload Forgejo Release
+      - name: release
         uses: https://code.forgejo.org/actions/forgejo-release@v2
         with:
           direction: upload
