@@ -67,7 +67,7 @@ tasks.processResources {
         )
     }
 
-    filesMatching("mixins.json") {
+    filesMatching("screenapi.mixins.json") {
         expand(
             "java_version" to "JAVA_${targetJavaVersion}"
         )
