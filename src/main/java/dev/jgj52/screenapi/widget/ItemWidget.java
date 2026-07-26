@@ -27,6 +27,12 @@ public class ItemWidget extends AbstractWidget {
         this.font = font;
         name = Component.translatable(item.getDescriptionId());
     }
+    public ItemWidget(int x, int y, int width, int height, Item item, Font font, Component name) {
+        super(x, y, width, height, Component.empty());
+        this.item = item;
+        this.font = font;
+        this.name = name;
+    }
     public ItemWidget(int x, int y, int width, int height, Block block, Font font) {
         super(x, y, width, height, Component.empty());
         this.item = block.asItem();
