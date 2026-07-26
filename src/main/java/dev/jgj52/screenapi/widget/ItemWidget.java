@@ -8,6 +8,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,29 +19,32 @@ import java.util.function.Consumer;
 public class ItemWidget extends AbstractWidget {
     private final Set<Consumer<Boolean>> onSelected = new HashSet<>();
     private final Component name;
-    private final Item item;
+    private final ItemStack item;
     private final Font font;
     private boolean selected;
-    public ItemWidget(int x, int y, int width, int height, Item item, Font font) {
-        super(x, y, width, height, Component.empty());
-        this.item = item;
-        this.font = font;
-        name = Component.translatable(item.getDescriptionId());
-    }
-    public ItemWidget(int x, int y, int width, int height, Item item, Font font, Component name) {
+    public ItemWidget(int x, int y, int width, int height, ItemStack item, Font font, Component name) {
         super(x, y, width, height, Component.empty());
         this.item = item;
         this.font = font;
         this.name = name;
     }
+    public ItemWidget(int x, int y, int width, int height, ItemStack item, Font font) {
+        this(x, y, width, height, item, font, Component.translatable(item.getItem().getDescriptionId()));
+    }
+    public ItemWidget(int x, int y, int width, int height, Item item, Font font, Component name) {
+        this(x, y, width, height, item.getDefaultInstance(), font, name);
+    }
+    public ItemWidget(int x, int y, int width, int height, Item item, Font font) {
+        this(x, y, width, height, item.getDefaultInstance(), font);
+    }
     public ItemWidget(int x, int y, int width, int height, Block block, Font font) {
-        super(x, y, width, height, Component.empty());
-        this.item = block.asItem();
-        this.font = font;
-        name = Component.translatable(block.getDescriptionId());
+        this(x, y, width, height, block.asItem(), font);
     }
 
     public Item getItem() {
+        return item.getItem();
+    }
+    public ItemStack getItemStack() {
         return item;
     }
     public Component getName() {
@@ -93,7 +97,7 @@ public class ItemWidget extends AbstractWidget {
                 /*renderFakeItem
                 *///? }
         (
-                item.getDefaultInstance(),
+                item,
                 getX() + 4,
                 getY() + (height - 16) / 2
         );
