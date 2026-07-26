@@ -6,7 +6,7 @@
   "description": "Makes screen making easier for mod developers",
   "authors": ["JGJ52"],
   "contact": {},
-  "license": "GPL-3.0",
+  "license": "MIT",
   "icon": "assets/screenapi/icon.png",
   "environment": "client",
   "entrypoints": {
