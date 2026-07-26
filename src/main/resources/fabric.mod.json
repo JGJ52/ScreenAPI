@@ -15,7 +15,7 @@
     ]
   },
   "mixins": [
-    "${mixins_file}"
+    "mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
