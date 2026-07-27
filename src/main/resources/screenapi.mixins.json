@@ -4,9 +4,9 @@
   "package": "dev.jgj52.screenapi.mixin",
   "compatibilityLevel": "${java_version}",
   "mixins": [
-    "WaveyCapesMixin"
   ],
   "client": [
+    "WaveyCapesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
