@@ -112,8 +112,13 @@ publishing {
     }
 }
 
+val jt = when {
+    sc.current.parsed >= "26.1" -> tasks.named<AbstractArchiveTask>("jar")
+    else -> tasks.named<AbstractArchiveTask>("remapJar")
+}
+
 publishMods {
-    file.set(tasks.remapJar.flatMap { it.archiveFile })
+    file.set(jt.flatMap { it.archiveFile })
     type.set(ALPHA)
     changelog.set("")
     modLoaders.add("fabric")
