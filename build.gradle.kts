@@ -67,7 +67,7 @@ tasks.processResources {
         )
     }
 
-    filesMatching("screenapi.mixins.json") {
+    filesMatching("${project.properties["archives_base_name"]}.mixins.json") {
         expand(
             "java_version" to "JAVA_${targetJavaVersion}"
         )
