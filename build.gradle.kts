@@ -113,7 +113,7 @@ publishing {
 }
 
 publishMods {
-    file.set(tasks.jar.flatMap { it.archiveFile })
+    file.set(tasks.remapJar.flatMap { it.archiveFile })
     type.set(ALPHA)
     changelog.set("")
     modLoaders.add("fabric")
