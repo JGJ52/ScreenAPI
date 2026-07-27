@@ -3,6 +3,7 @@ package dev.jgj52.screenapi.version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.spectator.SpectatorGui;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 public class VScreen {
     private static final Minecraft mc = Minecraft.getInstance();
@@ -30,5 +31,21 @@ public class VScreen {
                 .hud
                 //? }
                 .getSpectatorGui();
+    }
+
+    public static void setTimes(int fadeIn, int stay, int fadeOut) {
+        mc.gui
+            //? >= 26.2 {
+            .hud
+            //? }
+            .setTimes(fadeIn, stay, fadeOut);
+    }
+
+    public static void setTitle(Component title) {
+        mc.gui
+            //? >= 26.2 {
+            .hud
+            //? }
+            .setTitle(title);
     }
 }
