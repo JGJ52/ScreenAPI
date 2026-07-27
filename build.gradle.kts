@@ -128,7 +128,5 @@ publishMods {
             start.set(minecraft_version)
             end.set(minecraft_higher_version)
         }
-
-        requires("screenapi", "modmenu")
     }
 }
