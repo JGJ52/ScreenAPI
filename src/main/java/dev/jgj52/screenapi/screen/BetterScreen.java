@@ -119,6 +119,7 @@ public abstract class BetterScreen extends Screen {
         int max = 0;
         for (Widget<?> widget : widgets) {
             if (widget.pinned) continue;
+            if (!widget.widget.visible) continue;
             int wy = widget.widget.getY() - scrollOffset;
             min = Math.min(min, wy);
             max = Math.max(max, wy + widget.widget.getHeight());
