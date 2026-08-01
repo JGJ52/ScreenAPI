@@ -2,21 +2,16 @@ package dev.jgj52.screenapi.widget;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
-
 public class DownArrow extends AbstractWidget {
-    private final Supplier<Button> supplier;
     private final Runnable onClick;
 
-    public DownArrow(int x, int y, int width, int height, Supplier<Button> supplier, Runnable onClick) {
+    public DownArrow(int x, int y, int width, int height, Runnable onClick) {
         super(x, y, width, height, Component.empty());
-        this.supplier = supplier;
         this.onClick = onClick;
     }
 
@@ -67,6 +62,5 @@ public class DownArrow extends AbstractWidget {
 
     @Override
     public void onClick(@NotNull MouseButtonEvent event, boolean doubleClick) {
-        supplier.get().setFocused(true);
         onClick.run();
     }}
