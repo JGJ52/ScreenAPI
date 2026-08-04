@@ -74,6 +74,7 @@ public abstract class BetterScreen extends Screen {
     protected void clearWidgets() {
         super.clearWidgets();
         widgets.clear();
+        fasterWidgets.clear();
     }
 
     @Override
