@@ -41,8 +41,6 @@ dependencies {
     loomx.applyMojangMappings()
 
     modImplementation("net.fabricmc:fabric-loader:${loader_version}")
-
-    modCompileOnly(fletchingTable.modrinth("wavey-capes", minecraft_version, "fabric"))
 }
 
 val targetJavaVersion = when {
