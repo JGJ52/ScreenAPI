@@ -10,7 +10,7 @@ public class VScreen {
 
     public static void setScreen(Screen screen) {
         mc.
-        //? >= 26.2 {
+        //? if >= 26.2 {
         gui.
         //? }
         setScreen(screen);
@@ -18,7 +18,7 @@ public class VScreen {
 
     public static Screen current() {
         return
-            //? >= 26.2 {
+            //? if >= 26.2 {
             mc.gui.screen();
             //? } else {
             /*mc.screen;
@@ -27,7 +27,7 @@ public class VScreen {
 
     public static SpectatorGui spectatorGui() {
         return mc.gui
-                //? >= 26.2 {
+                //? if >= 26.2 {
                 .hud
                 //? }
                 .getSpectatorGui();
@@ -35,7 +35,7 @@ public class VScreen {
 
     public static void setTimes(int fadeIn, int stay, int fadeOut) {
         mc.gui
-            //? >= 26.2 {
+            //? if >= 26.2 {
             .hud
             //? }
             .setTimes(fadeIn, stay, fadeOut);
@@ -43,7 +43,7 @@ public class VScreen {
 
     public static void setTitle(Component title) {
         mc.gui
-            //? >= 26.2 {
+            //? if >= 26.2 {
             .hud
             //? }
             .setTitle(title);
