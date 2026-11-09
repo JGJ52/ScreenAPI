@@ -1,51 +1,9 @@
 # ScreenAPI
 ![Time](https://hackatime-badge.hackclub.com/U0922GMGGTU/ScreenAPI)
 
-i got so upset trying to make the math mathing in scroll
+A simple library for my mods
 
-## build.gradle
-```groovy
-repositories {
-    maven { url "https://api.modrinth.com/maven" }
-}
+# Mirrors
 
-dependencies {
-   implementation "maven.modrinth:screenapi:${project.screenapi_version}"
-}
-```
-
-## API usage
-```java
-package me.you.yourprojectwhichusesscreens.screens;
-
-import hu.jgj52.screenapi.screen.BetterScreen;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.StringWidget;
-import net.minecraft.network.chat.Component;
-
-public class YourScreen extends BetterScreen {
-    @Override
-    protected int getScrollSpeed() {
-        return 10;
-    }
-
-    @Override
-    public void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-        // just like render method in yarn
-        StringWidget stringWidget = getWidget("widget id", StringWidget.class); // will return null if its not StringWidget
-    }
-
-    @Override
-    protected void createWidgets(Font font) {
-        widget(new StringWidget(
-                10,
-                20,
-                font.width("cat"),
-                font.lineHeight,
-                Component.literal("cat"),
-                font
-        ), "widget id"); // with widget id you can later get that widget using getWidget(), just like in render
-    }
-}
-```
+[![Forgejo](https://img.shields.io/badge/Forgejo-git.jgj52.dev-f54927)](https://git.jgj52.dev/JGJ52/Capey)
+[![GitHub](https://img.shields.io/badge/GitHub-github.com-181717)](https://github.com/JGJ52/Capey)
