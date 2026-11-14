@@ -1,6 +1,7 @@
 package dev.jgj52.screenapi.widget;
 
 import com.google.gson.JsonPrimitive;
+import dev.jgj52.screenapi.version.VGuiGraphics;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -18,6 +19,7 @@ import org.joml.Vector3f;
 import java.util.function.Supplier;
 
 import static dev.jgj52.screenapi.ScreenAPI.config;
+import static dev.jgj52.screenapi.version.VGuiGraphics.entity;
 
 public class PlayerWithCapeWidget extends AbstractWidget {
     public static class FakePlayer {
@@ -121,25 +123,20 @@ public class PlayerWithCapeWidget extends AbstractWidget {
             );
         }
 
-        graphics.
-                //? >= 26.1 {
-                entity
-                //? } else {
-                /*submitEntityRenderState
-                *///? }
-                        (
-                                player.state(),
-                                scale,
-                                new Vector3f(0, offset, 0),
-                                new Quaternionf()
-                                        .rotateX((float) Math.toRadians(rotationX))
-                                        .rotateY((float) Math.toRadians(rotationY)),
-                                new Quaternionf(),
-                                getX(),
-                                getY(),
-                                getX() + getWidth(),
-                                getY() + getHeight()
-                        );
+        entity(
+                graphics,
+                player.state(),
+                scale,
+                new Vector3f(0, offset, 0),
+                new Quaternionf()
+                        .rotateX((float) Math.toRadians(rotationX))
+                        .rotateY((float) Math.toRadians(rotationY)),
+                new Quaternionf(),
+                getX(),
+                getY(),
+                getX() + getWidth(),
+                getY() + getHeight()
+        );
     }
 
     @Override
