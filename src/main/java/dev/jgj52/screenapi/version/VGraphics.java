@@ -4,14 +4,14 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.network.chat.Component;
-import org.joml.Quaternionfc;
-import org.joml.Vector3fc;
-import org.jspecify.annotations.Nullable;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+import org.jetbrains.annotations.Nullable;
 
-public class VGuiGraphics {
+public class VGraphics {
     public static void text(GuiGraphicsExtractor graphics, Font font, Component text, int x, int y, int color) {
         graphics.
-                //? >= 26.1 {
+                //? if >= 26.1 {
                 text
                 //? } else {
                 /*drawString
@@ -24,9 +24,9 @@ public class VGuiGraphics {
                                 color
                         );
     }
-    public static void entity(GuiGraphicsExtractor graphics, EntityRenderState state, float scale, Vector3fc translation, Quaternionfc rotation, @Nullable Quaternionfc overrideCameraAngle, int x0, int y0, int x1, int y1) {
+    public static void entity(GuiGraphicsExtractor graphics, EntityRenderState state, float scale, Vector3f translation, Quaternionf rotation, @Nullable Quaternionf overrideCameraAngle, int x0, int y0, int x1, int y1) {
         graphics.
-                //? >= 26.1 {
+                //? if >= 26.1 {
                 entity
                 //? } else {
                 /*submitEntityRenderState
